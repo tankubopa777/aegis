@@ -17,7 +17,7 @@ app.route("/v1/conversations", conversationController);
 app.get("/health", (c) => c.json({ status: "ok" }));
 
 // Start
-const port = Number(process.env.PORT) || 3000;
+const port = Number(process.env.PORT) || 8000;
 
 connectDB()
     .then(() => {
