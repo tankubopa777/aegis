@@ -1,15 +1,30 @@
 # aegis
 
-To install dependencies:
+## รันแบบ docker
+docker compose up --build
 
-```bash
+## รันแบบ local
+# ปิด container ตัว app ใน docker ก่อน
+# ติดตั้ง dependencies
 bun install
-```
 
-To run:
+# รัน (development พร้อม watch)
+bun run dev
 
-```bash
-bun run index.ts
-```
+# หรือรันแบบ production
+bun run start
 
-This project was created using `bun init` in bun v1.3.3. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+# curl สำหรับ test
+curl -X POST http://localhost:3000/v1/conversations \
+  -H "Content-Type: application/json" \
+  -d '{"title": "บทสนทนาของฉัน"}'
+
+curl "http://localhost:3000/v1/conversations?offset=0&limit=20"
+
+curl -X POST http://localhost:3000/v1/conversations/:id/messages \
+  -H "Content-Type: application/json" \
+  -d '{"content": "สวัสดีครับ"}'
+
+curl -X PATCH http://localhost:3000/v1/conversations/:id \
+  -H "Content-Type: application/json" \
+  -d '{"title": "ชื่อใหม่"}'
