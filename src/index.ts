@@ -19,9 +19,14 @@ app.get("/health", (c) => c.json({ status: "ok" }));
 // Start
 const port = Number(process.env.PORT) || 3000;
 
-connectDB().then(() => {
-    console.log(`A.E.G.I.S running on port ${port}`);
-});
+connectDB()
+    .then(() => {
+        console.log(`A.E.G.I.S running on port ${port}`);
+    })
+    .catch((err) => {
+        console.error("Failed to connect to MongoDB:", err.message);
+        process.exit(1);
+    });
 
 export default {
     port,
