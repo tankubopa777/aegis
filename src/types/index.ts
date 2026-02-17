@@ -12,6 +12,10 @@ export interface IConversation {
     updatedAt: Date;
 }
 
+export interface IAIService {
+    generateReply(userMessage: string): string | Promise<string>;
+}
+
 export interface ApiResponse<T = unknown> {
     success: boolean;
     data?: T;

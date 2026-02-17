@@ -1,4 +1,6 @@
-export class MockAIService {
+import type { IAIService } from "../types";
+
+export class MockAIAdapter implements IAIService {
     generateReply(userMessage: string): string {
         const replies = [
             `You said: "${userMessage}" — that's interesting!`,

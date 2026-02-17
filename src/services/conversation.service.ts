@@ -1,12 +1,12 @@
 import { AppError } from "../errors/app-error";
 import { ConversationRepository } from "../repositories/conversation.repository";
-import { MockAIService } from "./mock-ai.service";
-import type { IMessage } from "../types";
+import { MockAIAdapter } from "../adapters/mock-ai.adapter";
+import type { IAIService, IMessage } from "../types";
 
 export class ConversationService {
     constructor(
         private repo = new ConversationRepository(),
-        private ai = new MockAIService()
+        private ai: IAIService = new MockAIAdapter()
     ) { }
 
     async list(offset: number, limit: number) {
@@ -24,7 +24,7 @@ export class ConversationService {
         const userMsg: IMessage = { role: "user", content, createdAt: new Date() };
         const aiReply: IMessage = {
             role: "assistant",
-            content: this.ai.generateReply(content),
+            content: await this.ai.generateReply(content),
             createdAt: new Date(),
         };
 
